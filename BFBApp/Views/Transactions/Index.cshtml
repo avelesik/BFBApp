@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BFBApp.Models.Transactions>
+
+@{
+    ViewBag.Title = "Список сделок";
+}
+
+<h2>Список сделок</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Currencies.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Participants.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Participants1.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Currencies.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Participants.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Participants1.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTime)
+        </td>
+    </tr>
+}
+
+</table>

@@ -11,10 +11,13 @@ namespace BFBApp.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
+        [Display(Name = "Цена")]
         public decimal Price { get; set; }
 
+        [Display(Name = "Объем")]
         public int Amount { get; set; }
 
+        [Display(Name = "Дата и время")]
         public DateTime DateTime { get; set; }
 
         public int participant_new_Id { get; set; }
