@@ -13,14 +13,22 @@ namespace BFBApp.Controllers
     public class TransactionsController : Controller
     {
         private ModelExchange db = new ModelExchange();
-
         // GET: Transactions
         public ActionResult Index()
         {
             var transactions = db.Transactions.Include(t => t.Currencies).Include(t => t.Participants).Include(t => t.Participants1);
             return View(transactions.ToList());
         }
+        public ActionResult Dashboard()
+        {
+            var list = db.Transactions.ToList();
+            var ages = list.Select(t => t.Price);
+            var relatitions = list.Select(t => t.DateTime).ToList();
 
+            ViewBag.AGES = ages;
+            ViewBag.REP = relatitions.ToList();
+            return View();
+        }
         // GET: Transactions/Details/5
         public ActionResult Details(int? id)
         {
