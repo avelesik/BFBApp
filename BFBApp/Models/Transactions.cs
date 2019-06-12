@@ -17,7 +17,8 @@ namespace BFBApp.Models
         [Display(Name = "Объем")]
         public int Amount { get; set; }
 
-        [Display(Name = "Дата и время")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [Display(Name = "Дата")]
         public DateTime DateTime { get; set; }
 
         public int participant_new_Id { get; set; }

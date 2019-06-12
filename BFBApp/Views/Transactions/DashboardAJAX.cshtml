@@ -4,9 +4,12 @@
 }
 
 <h2>График изменений</h2>
-<div class="graf">
+
+<div>
     <canvas id="myChart" width="400" height="400"></canvas>
+    <input class="ajax-form" type="submit" name="nazvanie_knopki" value="Обновить данные" />
 </div>
+
 <div>
     @Html.Action("_Index")
 </div>
@@ -62,6 +65,21 @@
                 }]
             }
         }
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(".ajax-form").click(function (e) {
+        var form = {};
+        form[$(this).attr('name')] = 1;
+        $.ajax({
+            url: '/Transactions/DashboardAJAX',
+            type: "POST",
+            success: function (data) {
+                $('#ajax-content').html(data);
+            }
+        });
+        return false;
     });
 </script>
 
