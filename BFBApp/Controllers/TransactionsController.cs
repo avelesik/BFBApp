@@ -22,11 +22,16 @@ namespace BFBApp.Controllers
         public ActionResult Dashboard()
         {
             var list = db.Transactions.ToList();
-            var ages = list.Select(t => t.Price);
-            var relatitions = list.Select(t => t.DateTime).ToList();
+            List<string> relatitions=new List<string>();
+            foreach(var item in list)
+            {
+                relatitions.Add(item.DateTime.Year+"-0"+ item.DateTime.Month+"-"+item.DateTime.Day);
+            }
 
-            ViewBag.AGES = ages;
-            ViewBag.REP = relatitions.ToList();
+            ViewBag.REP = relatitions.Distinct().ToList();
+            ViewBag.AGES1 = db.Transactions.Where(t => t.currency_Id == 1).Select(s => s.Price).ToList();
+            ViewBag.AGES2 = db.Transactions.Where(t => t.currency_Id == 2).Select(s => s.Price).ToList();
+            ViewBag.AGES3 = db.Transactions.Where(t => t.currency_Id == 3).Select(s => s.Price).ToList();
             return View();
         }
         // GET: Transactions/Details/5

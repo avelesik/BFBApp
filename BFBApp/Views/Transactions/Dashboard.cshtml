@@ -4,43 +4,58 @@
 }
 
 <h2>Dashboard</h2>
-<canvas id="myChart" width="400" height="400"></canvas>
-<script src="~/Scripts/Chart.min.js"></script>
+<div>
+    <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+<script src="http://www.chartjs.org/dist/master/Chart.bundle.min.js"></script>
 <script>
     var repArray=@Html.Raw(Json.Encode(ViewBag.REP));
-    var ages=@Html.Raw(Json.Encode(ViewBag.AGES));
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
+    var ages1 =@Html.Raw(Json.Encode(ViewBag.AGES1));
+    var ages2 =@Html.Raw(Json.Encode(ViewBag.AGES2));
+    var ages3 =@Html.Raw(Json.Encode(ViewBag.AGES3));
+
+    var barChartData = {
+        labels: repArray,
+        datasets: [
+            {
+                data: ages1
+            }
+            ,
+            {
+                data: ages2
+            },
+            {
+                data: ages3
+            }
+        ]
+    };
+
+    Chart.defaults.global.defaultFontFamily = "'Comic Sans MS'";
+    Chart.defaults.global.elements.point.radius = 0;
+    Chart.defaults.global.elements.point.hoverRadius = 0;
+
+    var ctx = document.getElementById("myChart").getContext("2d");
+    new Chart(ctx, {
         type: 'line',
-        data: {
-            labels: ages,
-            datasets: [{
-                label: '# of Votes',
-                data: repArray,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
+        data: barChartData,
         options: {
+            responsive: true,
+            legend: {
+                display: false
+            },
+            title: {
+                display: false
+            },
             scales: {
-                yAxes: [{
+                xAxes: [{
+                    type: "time",
+                    time: {
+                        displayFormats: {
+                            quarter: 'YYYY-MM-DD'
+                        }
+                    },
                     ticks: {
-                        beginAtZero: true
+                        minRotation: 90
                     }
                 }]
             }
